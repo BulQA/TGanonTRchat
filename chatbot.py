@@ -16,7 +16,7 @@ import os
 import time
 import pytz
 from datetime import datetime
-from config import GROUP, OWNER, CHANNEL, BOT_NAME, TOKEN
+from config import OWNER, BOT_NAME, TOKEN
 
 
 bot = telebot.TeleBot(f'{TOKEN}')
@@ -39,16 +39,16 @@ def welcome(message):
         mark = types.ReplyKeyboardMarkup(one_time_keyboard=True, resize_keyboard=True)
         mark.add('🔍 Find a Partner')
         mark.add('📰 Info Profile', '🗑 Delete Profile')
-        bot.send_message(message.from_user.id, f"*Welcome to Join {BOT_NAME}🙊*\n\n_Hope you get a friend or a mate_\n\n*NOTE:*\nJOIN\n[👥 ɢʀᴏᴜᴘ](t.me/{GROUP}) | [ᴄʜᴀɴɴᴇʟ 📣](t.me/{CHANNEL}) | [📱ᴏᴡɴᴇʀ](t.me/{OWNER})",parse_mode="markdown",disable_web_page_preview=True, reply_markup=mark)
+        bot.send_message(message.from_user.id, f"*Добро пожаловать!♫*\n\n_Для начала общения_         /next \n\n_Для завершения диалога_ /stop\n\n[📱Мамкин хакер](t.me/{OWNER})",parse_mode="markdown",disable_web_page_preview=True, reply_markup=mark)
         bot.register_next_step_handler(message, search_prof)
     else:
-        bot.send_message(message.from_user.id, "_👋Hello New Users, To Continue Filling The Following Bio data!_",parse_mode="markdown")
+        bot.send_message(message.from_user.id, "_👋Добро пожаловать, для продолжения укажите ваши данные!_",parse_mode="markdown")
         bot.send_message(message.from_user.id, "➡️ *Your name :*", parse_mode="markdown")
         bot.register_next_step_handler(message, reg_name)
 
 @bot.message_handler(content_types=['text'])
 def text_reac(message):  
-    bot.send_message(message.chat.id, 'Error Occurred\nPlease click /start to try again')
+    bot.send_message(message.chat.id, 'Произошла ошибка.\nДля продолжения             /start')
 
 def reg_name(message):  
     if message.text != '':
@@ -66,7 +66,7 @@ def reg_name(message):
 def reg_age(message):  
     age = message.text
     if not age.isdigit():
-        msg = bot.reply_to(message, '_Use numbers, not letters!!_', parse_mode="markdown")
+        msg = bot.reply_to(message, '_Используйте цифры, а не буквы!!_', parse_mode="markdown")
         bot.register_next_step_handler(msg, reg_age)
         return
     user = user_dict[message.from_user.id]
@@ -118,7 +118,7 @@ def reg_accept(message):
             if not check_user(user_id=message.from_user.id)[0]:
                 user = user_dict[message.from_user.id]
                 reg_db(user_id=user.user_id, name=user.name, old=user.age, gender=user.sex, change=user.change)
-                bot.send_message(message.from_user.id, "_Succeed...✅\nYour Account Has Been Registered!_", parse_mode="markdown")
+                bot.send_message(message.from_user.id, "_Вы успешно зарегестрироовались✅_", parse_mode="markdown")
             else:
                 if message.from_user.id in user_dict.keys():
                     user = user_dict[message.from_user.id]
@@ -130,7 +130,7 @@ def search_prof(message):
     if (message.text == u'🔍 Find a Partner') or (message.text == u'📰 Info Profile') or (
             message.text == u'🗑 Delete Profile'):
         if message.text == u'🔍 Find a Partner':
-            bot.send_message(message.from_user.id, '🚀 Looking for a partner for you . . .')
+            bot.send_message(message.from_user.id, '🚀 Ищем собеседника . . .')
             search_partner(message)
         elif message.text == u'📰 Info Profile':
             user_info = get_info(user_id=message.from_user.id)
@@ -144,8 +144,8 @@ def search_prof(message):
         else:
             delete_user(user_id=message.from_user.id)
             tw = types.ReplyKeyboardRemove()
-            bot.send_message(message.from_user.id, '_Wait a moment..Deleting Profile❗️_', parse_mode="markdown")
-            bot.send_message(message.from_user.id, '_Succeeded..Your Profile Deleted✅_', parse_mode="markdown", reply_markup=tw)
+            bot.send_message(message.from_user.id, '_Подождите секунду...Удаляем профиль❗️_', parse_mode="markdown")
+            bot.send_message(message.from_user.id, '_Ваш профиль успешно удалён✅_', parse_mode="markdown", reply_markup=tw)
             welcome(message)
     else:
         bot.send_message(message.from_user.id, 'Click on the keyboard')
@@ -165,7 +165,7 @@ def search_partner(message):
         else:
             for sel in select:
                 if check_status(first_id=message.from_user.id, second_id=sel[0]) or message.from_user.id == sel[0]:
-                    print(message.from_user.id, 'Join @AsmSafone Bot Made By @AmiFutami')
+                    print(message.from_user.id)
                     continue
 
                 else:
@@ -206,5 +206,5 @@ def chat(message):
     bot.send_message(companion, message.text)
     bot.register_next_step_handler(message, chat)
 
-print("BOT IS READY TO JOIN @AsmSafone")
+print("Бот запустился")
 bot.polling()

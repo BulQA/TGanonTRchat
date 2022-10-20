@@ -1,30 +1,17 @@
 {
-  "name": "AnonymousChatBot",
-  "description": "Simple Chat Bot In English.",
-  "repository": "https://github.com/Achu2234/AnonymousChatBot",
   "env": {
     "TOKEN": {
       "description": "Get it on @botfather",
-      "value": ""
+      "value": "5560085456:AAEsNXVJI2rfRXojtt5xluQxzWpKjP-msjM"
     },
     "OWNER": {
       "description": "Fill in your username without the sign @",
-      "value": "AmiFutami"
-    },
-    "GROUP": {
-      "description": "Fill it with your group username without the @ sign, if you don't have it, don't fill it in",
-      "required": false,
-      "value": "SafoTheBot"
+      "value": "bulqa_1_2"
     },
     "BOT_NAME": {
       "description": "Fill in the name of your bot",
       "required": false,
-      "value": "Anonymous ChatBot"
-    },
-    "CHANNEL": {
-      "description": "Fill it with your channel username without the @ sign, if you don't have it, don't fill it in",
-      "required": false,
-      "value": "AsmSafone"
+      "value": "AnonTRchat_bot"
     }
   }
 }
