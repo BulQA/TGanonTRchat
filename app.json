@@ -1,0 +1,17 @@
+{
+  "env": {
+    "TOKEN": {
+      "description": "Get it on @botfather",
+      "value": "ваш токен"
+    },
+    "OWNER": {
+      "description": "Fill in your username without the sign @",
+      "value": "ваш никнейм без \"@\""
+    },
+    "BOT_NAME": {
+      "description": "Fill in the name of your bot",
+      "required": false,
+      "value": "имя вашего бота"
+    }
+  }
+}
